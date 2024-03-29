@@ -89,6 +89,10 @@ class ESI extends Root
 
 		add_action('load-widgets.php', __NAMESPACE__ . '\Purge::purge_widget');
 		add_action('wp_update_comment_count', __NAMESPACE__ . '\Purge::purge_comment_widget');
+		
+		// Remove default Admin bar. Fix https://github.com/elementor/elementor/issues/25198
+		remove_action( 'wp_body_open', 'wp_admin_bar_render', 0 );
+		remove_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
 
 		/**
 		 * Recover REQUEST_URI
